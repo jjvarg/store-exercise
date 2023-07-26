@@ -4,7 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import { useFetch } from "../hooks/UseFetch";
 
 function Store() {
-  const [url, setUrl] = useState("http://localhost:5000/products");
+  const [url] = useState("http://localhost:5000/products");
   const { data, isPending, error } = useFetch(url);
 
   return (
