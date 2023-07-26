@@ -23,3 +23,11 @@ Database-less Express React Node e-Commerce webapp
   `npm start`
 - To start the React frontend, cd to the client folder and enter
   `npm run dev`
+
+---
+
+# Optimizations/Known Issues
+
+- Cart Modal does not correctly display product info due to promise issue (Sorry)
+
+- The Add Products page currently has basic functionality but can be accessed from '/add-product'. Adding a product pushes a new object to server memory. If this product does not have a valid Stripe ID, and you try to checkout, the server will crash...
