@@ -1,5 +1,19 @@
 import { createContext, useEffect, useState } from "react";
-import { getProductData } from "./ProductStore";
+
+async function getProductData(id: string) {
+  let productsArray = await fetch("http://localhost:5000/products").then(
+    (res) => res.json()
+  );
+  let productData = productsArray.find((product) => product.id === id);
+
+  if (productData == undefined) {
+    return undefined;
+  }
+
+  return productData;
+}
+
+export { getProductData };
 
 export const CartContext = createContext({
   items: [],
