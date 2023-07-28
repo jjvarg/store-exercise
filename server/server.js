@@ -15,12 +15,18 @@ const port = 5000
 const stripe = new Stripe (process.env.STRIPE_KEY)
 
 app.use(cors())
+const middle = express.urlencoded({
+    extended: true,
+    limit: 10000,
+    parameterLimit: 3,
+});
+
 app.use(express.static('public'))
 app.use(express.json())
 
 app.use("/products", productsRouter);
 //Add new products and return them
-app.post('/products'), function (req, res) {
+app.post('/products', middle), function (req, res) {
     product.push(req.body);
     res.setHeader('Content-Type', 'application/json');
     res.send(product)

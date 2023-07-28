@@ -1,15 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 
 async function getProductData(id: string) {
-  let productsArray = await fetch("http://localhost:5000/products").then(
-    (res) => res.json()
-  );
-  let productData = productsArray.find((product) => product.id === id);
-
+  const response = await fetch("http://localhost:5000/products");
+  const productsArray = await response.json();
+  //console.log(productsArray);
+  const productData = productsArray.find((product) => product.id === id);
   if (productData == undefined) {
     return undefined;
   }
-
+  //console.log(productData);
   return productData;
 }
 
@@ -105,6 +104,7 @@ export function CartProvider({ children }) {
     cartProducts.map(async (cartItem) => {
       const productData = await getProductData(cartItem.id);
       totalCost += productData.price * cartItem.quantity;
+      console.log(totalCost);
     });
     return totalCost;
   }

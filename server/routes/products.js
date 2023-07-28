@@ -36,11 +36,11 @@ productsRouter.post('/', function (req, res) {
     //Get titles from products array
     let titles = productsArray.map(product => product.title);
 
-    // create an object of new Item
+    // create an object of new Item and convert price from string to number
     let newProduct = {
         id: req.body.id,
         title: req.body.title,
-        price: req.body.price,
+        price: parseInt(req.body.price),
     };
 
     // push new item object to products array of items

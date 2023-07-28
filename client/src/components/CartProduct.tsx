@@ -1,20 +1,29 @@
 import { Button } from "react-bootstrap";
 import { CartContext } from "../CartContext";
-import { useContext } from "react";
-import { getProductData } from "../CartContext";
+import { useContext, useEffect, useState } from "react";
 
 function CartProduct(props) {
+  const [products, setProducts] = useState([]);
   const cart = useContext(CartContext);
   const id = props.id;
   const quantity = props.quantity;
-  const productData = getProductData(id);
-  console.log(productData);
-
+  useEffect(() => {
+    async function getProductData(id) {
+      const response = await fetch("http://localhost:5000/products");
+      const productsArray = await response.json();
+      const productData = productsArray.find((product) => product.id === id);
+      if (productData == undefined) {
+        return undefined;
+      }
+      setProducts(productData);
+    }
+    getProductData(id);
+  }, [props.id]);
   return (
     <>
-      <h3>{productData.title}</h3>
+      <h3>{products.title}</h3>
       <p>{quantity} total</p>
-      <p>${(quantity * productData.price).toFixed(2)}</p>
+      <p>${(quantity * products.price).toFixed(2)}</p>
       <Button
         variant="danger"
         size="sm"

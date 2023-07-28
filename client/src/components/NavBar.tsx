@@ -50,6 +50,9 @@ function NavBarComponent() {
           />
           Palla Exercise Store
         </Navbar.Brand>
+        <Button href="/add-product" variant="outline-primary">
+          Add Product
+        </Button>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Button variant="outline-primary" onClick={handleShow}>
