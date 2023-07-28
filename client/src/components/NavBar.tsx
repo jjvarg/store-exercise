@@ -1,5 +1,5 @@
 import { Button, Navbar, Modal } from "react-bootstrap";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { CartContext } from "../CartContext";
 import CartProduct from "./CartProduct";
 
@@ -9,6 +9,15 @@ function NavBarComponent() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [productTotalCost, setProductsTotalCost] = useState(0);
+
+  useEffect(() => {
+    async function getProductTotal() {
+      const totalCost = cart.getTotalCost();
+      setProductsTotalCost(totalCost);
+    }
+    getProductTotal();
+  }, []);
 
   //Checkout via stripe and send cart to backend as JSON data
   const checkout = async () => {
@@ -77,7 +86,7 @@ function NavBarComponent() {
                 ></CartProduct>
               ))}
 
-              <h1>Total: ${cart.getTotalCost().toFixed(2)}</h1>
+              <h1>Total: ${productTotalCost}</h1>
 
               <Button variant="success" onClick={checkout}>
                 Proceed to checkout

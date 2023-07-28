@@ -23,6 +23,11 @@ export const CartContext = createContext({
   getTotalCost: () => {},
 });
 
+export type CartProduct = {
+  id: string;
+  quantity: number;
+};
+
 //Retrieve cart from local storage, if cart doesn't exist, fallback and create an empty array
 const cartFromLocalStorage = JSON.parse(
   localStorage.getItem("cartProducts") ?? "[]"
@@ -81,7 +86,7 @@ export function CartProvider({ children }) {
     } else {
       //If quantity is greater than 1, decrease quantity by 1
       setCartProducts(
-        cartProducts.map((product) =>
+        cartProducts.map((product: CartProduct) =>
           product.id === id
             ? { ...product, quantity: product.quantity - 1 }
             : product
@@ -89,22 +94,25 @@ export function CartProvider({ children }) {
       );
     }
   }
-  function deleteFromCart(id) {
+  function deleteFromCart(id: string) {
     //Remove the product by id
-    setCartProducts((cartProducts) => {
+    setCartProducts((cartProducts: { id: string }[]) => {
       return cartProducts.filter((currentProduct) => {
         return currentProduct.id != id;
       });
     });
   }
 
-  function getTotalCost() {
+  async function getTotalCost() {
     //Simple math for cart/checkout total
     let totalCost = 0;
-    cartProducts.map(async (cartItem) => {
-      const productData = await getProductData(cartItem.id);
-      totalCost += productData.price * cartItem.quantity;
-    });
+    await Promise.all(
+      cartProducts.map(async (cartItem: CartProduct) => {
+        const productData = await getProductData(cartItem.id);
+        totalCost += productData.price * cartItem.quantity;
+      })
+    );
+    console.log(totalCost);
     return totalCost;
   }
 
