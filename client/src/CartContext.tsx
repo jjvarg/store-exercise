@@ -104,7 +104,6 @@ export function CartProvider({ children }) {
     cartProducts.map(async (cartItem) => {
       const productData = await getProductData(cartItem.id);
       totalCost += productData.price * cartItem.quantity;
-      console.log(totalCost);
     });
     return totalCost;
   }
