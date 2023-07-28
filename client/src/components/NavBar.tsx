@@ -36,6 +36,7 @@ function NavBarComponent() {
     (sum, product) => sum + product.quantity,
     0
   );
+
   //Bootstrap components used for simple/quick styling and functionality
   return (
     <>

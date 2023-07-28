@@ -9,8 +9,8 @@ const ProductForm = () => {
   if (status === "success") {
     return (
       <>
-        <div className="text-2xl">Product added successfully!</div>
-        <div className="text-md">{message}</div>
+        <h1 align="center">Product added successfully!</h1>
+        <Button href="/add-product">Add another product</Button>
       </>
     );
   }
@@ -18,8 +18,8 @@ const ProductForm = () => {
   if (status === "error") {
     return (
       <>
-        <div className="text-2xl">Something went wrong...</div>
-        <div className="text-md">{message}</div>
+        <h1 align="center">Something went wrong...</h1>
+        <span align="center">{message}</span>
       </>
     );
   }

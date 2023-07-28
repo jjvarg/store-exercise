@@ -39,7 +39,7 @@ function useForm({ additionalData }) {
       body: JSON.stringify(data),
     })
       .then((response) => {
-        if (response.status !== 200) {
+        if (response.status !== 201) {
           throw new Error(response.statusText);
         }
 
@@ -47,7 +47,7 @@ function useForm({ additionalData }) {
       })
 
       .then(() => {
-        setMessage("Product submitted successfully.");
+        setMessage("Form submitted successfully.");
 
         setStatus("success");
       })
