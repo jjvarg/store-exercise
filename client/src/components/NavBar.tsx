@@ -13,11 +13,12 @@ function NavBarComponent() {
 
   useEffect(() => {
     async function getProductTotal() {
-      const totalCost = cart.getTotalCost();
+      const totalCost = await cart.getTotalCost();
       setProductsTotalCost(totalCost);
     }
     getProductTotal();
-  }, []);
+    console.log(productTotalCost)
+  }, [cart, productTotalCost]);
 
   //Checkout via stripe and send cart to backend as JSON data
   const checkout = async () => {

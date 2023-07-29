@@ -112,7 +112,6 @@ export function CartProvider({ children }) {
         totalCost += productData.price * cartItem.quantity;
       })
     );
-    console.log(totalCost);
     return totalCost;
   }
 
