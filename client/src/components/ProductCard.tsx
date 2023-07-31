@@ -13,8 +13,9 @@ function ProductCard(props) {
         <Card.Title>{product.title}</Card.Title>
         <hr></hr>
         <Card.Img src="./src/assets/200.svg" />
-        <Card.Text>${product.price}</Card.Text>
+        <Card.Body><Button variant ="outline-primary" href={`/products/${product.id}`}>Click here to for more details</Button></Card.Body>
         <hr></hr>
+        <Card.Text>${parseFloat(product.price).toFixed(2)}</Card.Text>
         {productQuantity > 0 ? (
           <>
             <Form as={Row}>

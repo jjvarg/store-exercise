@@ -16,7 +16,7 @@ const stripe = new Stripe (process.env.STRIPE_KEY)
 
 app.use(cors())
 const middle = express.urlencoded({
-    extended: true,
+    extended: false,
     limit: 10000,
     parameterLimit: 3,
 });
@@ -41,6 +41,7 @@ app.get('/products', function (req, res) {
 app.use(cookieParser())
 app.use(cookieSession({secret: `${process.env.COOKIE_SECRET}`}))
 
+/*
 app.post('/checkout', async (req, res) => {
     console.log(req.body)
     //Format the data from the body to match how stripe receives it
@@ -66,6 +67,7 @@ app.post('/checkout', async (req, res) => {
         url:session.url
     }))
 })
+*/
 
 app.listen(port, () => {
     console.log(`App is listening on port ${port}`)

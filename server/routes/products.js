@@ -4,14 +4,16 @@ const productsRouter = express.Router();
 
 let productsArray = [
     {
-        id: "price_1NWKNaB851ugm4QdDSLxaufG",
+        id: "1",
         title: "Test Product #1",
-        price: 10.0,
+        description: "Test Description",
+        price: 10.00,
       },
       {
-        id: "price_1NWKOgB851ugm4Qd39OXxmdU",
+        id: "2",
         title: "Test Product #2",
-        price: 1.0,
+        description: "Test Description",
+        price: 1.00,
       },
 ]
 
@@ -38,9 +40,10 @@ productsRouter.post('/', function (req, res) {
 
     // create an object of new Item and convert price from string to number
     let newProduct = {
-        id: req.body.id,
+        id: (productsArray.length + 1).toString(),
         title: req.body.title,
-        price: parseInt(req.body.price),
+        description: req.body.description,
+        price: parseFloat(req.body.price),
     };
 
     // push new item object to products array of items

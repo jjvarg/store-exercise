@@ -31,19 +31,19 @@ const ProductForm = () => {
         <Card.Body>
           <Form action={FORM_ENDPOINT} onSubmit={handleSubmit} method="POST">
             <Form.Group className="mb-3">
-              <Form.Label>Product ID</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your Stripe product ID"
-                name="id"
-                required
-              />
-              <hr></hr>
               <Form.Label>Product Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter a name for your new product"
                 name="title"
+                required
+              />
+              <hr></hr>
+              <Form.Label>Product Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter a description of the product"
+                name="description"
                 required
               />
               <hr></hr>
@@ -57,7 +57,6 @@ const ProductForm = () => {
                   name="price"
                   required
                 />
-                <InputGroup.Text>.00</InputGroup.Text>
               </InputGroup>
               <hr></hr>
               {status !== "loading" && (

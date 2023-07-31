@@ -17,7 +17,7 @@ function NavBarComponent() {
       setProductsTotalCost(totalCost);
     }
     getProductTotal();
-    console.log(productTotalCost)
+    //console.log(productTotalCost)
   }, [cart, productTotalCost]);
 
   //Checkout via stripe and send cart to backend as JSON data
@@ -94,7 +94,7 @@ function NavBarComponent() {
               </Button>
             </>
           ) : (
-            <h1>There are no products in your cart.</h1>
+            <h3>There are no products in your cart.</h3>
           )}
         </Modal.Body>
       </Modal>
