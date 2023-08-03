@@ -20,27 +20,6 @@ function NavBarComponent() {
     //console.log(productTotalCost)
   }, [cart, productTotalCost]);
 
-  //Checkout via stripe and send cart to backend as JSON data
-  const checkout = async () => {
-    await fetch("http://localhost:5000/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ items: cart.items }),
-    })
-      .then((response) => {
-        //Retrieve response from backend and process to JSON
-        return response.json();
-      })
-      .then((response) => {
-        //Retrieve URL from JSON and redirecting the user to Stripe
-        if (response.url) {
-          window.location.assign(response.url);
-        }
-      });
-  };
-
   //Calculate total products in cart
   const productsCount = cart.items.reduce(
     (sum, product) => sum + product.quantity,
@@ -89,7 +68,7 @@ function NavBarComponent() {
 
               <h1>Total: ${productTotalCost}</h1>
 
-              <Button variant="success" onClick={checkout}>
+              <Button variant="success" href="/checkout">
                 Proceed to checkout
               </Button>
             </>

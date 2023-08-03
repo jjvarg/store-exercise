@@ -1,20 +1,30 @@
-import { useState } from "react";
-import { useFetch } from "../hooks/UseFetch";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function Product() {
   const { id } = useParams();
-  console.log(id)
-  const [url] = useState("http://localhost:5000/products/" + id);
-  const { data, isPending, error } = useFetch(url);
+  const [product, setProduct] = useState([]);
+  useEffect(() => {
+    async function getProductData(id) {
+      const response = await fetch(`http://localhost:5000/products/${id}`);
+      const productData = await response.json();
+      setProduct(productData);
+    }
+    getProductData(id);
+  },);
 
   return (
+  // This is a temporary solution to display product data
     <>
-      {isPending && <div>Loading...</div>}
-      {error && <div>{error}</div>}
+    <div>
       <h1 align="center" className="p-3">
-        {data.title}
+        {product.title}
       </h1>
+      <p>
+        {product.description}
+      </p>
+      <span>${product.price}</span>
+    </div>
     </>
   );
 }

@@ -9,6 +9,7 @@ import NavBarComponent from "./components/NavBar";
 import CartProvider from "./CartContext";
 import AddProduct from "./pages/AddProduct";
 import Product from "./pages/Product"
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="success" element={<Success />}></Route>
             <Route path="cancel" element={<Cancel />}></Route>
             <Route path="products/:id" element={<Product />}></Route>
+            <Route path="checkout" element={<Checkout />}></Route>
           </Routes>
         </BrowserRouter>
       </Container>
